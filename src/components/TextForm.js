@@ -33,9 +33,9 @@ export default function TextForm(props) {
     return (
         <>
         <div className="container my-3">
-            <h1>{props.heading}</h1>
+            <h1 className={`text-${props.mode==='light'?'dark':'light'}`}>{props.heading}</h1>
             <div className="form-group my-2">
-                <textarea className="form-control" value={text} onChange={handleOnChange}  id="myBox" rows="8"></textarea>
+                <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='dark'?'white':'#042743'}}  id="myBox" rows="8"></textarea>
             </div>
             <button className="btn btn-dark" onClick={handleUpClick}>Convert to Uppercase</button>
             <button className="btn btn-dark mx-2" onClick={handleLoClick}>Convert to Lowercase</button>
@@ -43,7 +43,7 @@ export default function TextForm(props) {
             <button className="btn btn-dark mx-2" onClick={clear}>Clear</button>
         </div>
 
-        <div className="container">
+        <div className={`container text-${props.mode==='light'?'dark':'light'}`}>
             <div>
                 {text.split(" ").length} Words and {text.length} letters
             </div>

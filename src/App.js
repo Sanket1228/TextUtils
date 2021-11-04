@@ -1,9 +1,15 @@
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, { useState } from 'react'
 import Alert from './components/Alert';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
 
 
 function App() {
@@ -11,24 +17,24 @@ function App() {
   const [toggleTxt, settoggleTxt] = useState("Enable Dark Mode")
   const [alert, setAlert] = useState(null)
 
-  const toggleMode = ()=>{
-    if(mode === 'light'){
+  const toggleMode = () => {
+    if (mode === 'light') {
       setMode("dark");
       document.body.style.backgroundColor = '#042743';
       settoggleTxt("Disable Dark Mode")
-      showAlert("Dark mode activated","success");
+      showAlert("Dark mode activated", "success");
     }
-    else{
+    else {
       setMode("light");
       document.body.style.backgroundColor = 'white';
       settoggleTxt("Enable Dark Mode");
-      showAlert("Light mode activated","success");
+      showAlert("Light mode activated", "success");
     }
   }
 
-  const showAlert = (message, type)=>{
+  const showAlert = (message, type) => {
     setAlert({
-      msg : message,
+      msg: message,
       type: type
     })
     setTimeout(() => {
@@ -38,10 +44,19 @@ function App() {
 
   return (
     <>
-      <Navbar title="TextUtils" mode={mode} toggleMode = {toggleMode} toggleTxt={toggleTxt}/>
-      <Alert alert={alert}/>
-      <TextForm heading="Enter Text Here " mode={mode} showAlert={showAlert} />
-      {/* <About mode={mode}/> */}
+      <BrowserRouter>
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} toggleTxt={toggleTxt} />
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route path="/" element={<TextForm heading="Enter Text Here " mode={mode} showAlert={showAlert} />}/>             
+            <Route path="/about" element={<About mode={mode} />}/>             
+          </Routes>
+        </div>
+      </BrowserRouter>
+
+
+
     </>
   );
 }

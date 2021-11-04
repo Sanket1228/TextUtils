@@ -7,12 +7,14 @@ export default function TextForm(props) {
         
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to uppercase","success");
     }
 
     const handleLoClick = () =>{
         
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to lowercase","success");
     }
 
     const handleOnChange = (event) =>{
@@ -22,12 +24,14 @@ export default function TextForm(props) {
     const clear = () =>{
         let newText = "";
         setText(newText);
+        props.showAlert("Text cleared","success");
     }
 
     const handleCopy = () =>{
         var text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        props.showAlert("Copied to keyboard","success");
     }
     
     return (
